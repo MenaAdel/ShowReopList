@@ -128,7 +128,6 @@ public class ListRepoFragment extends Fragment implements RequestsObserver,OnLon
     * This method used to get data if there is no connection.
      */
     private void getNextReposOffLine(){
-        if(!data.isEmpty()) {
             Cursor cr = db.SELECT(db);
             cr.moveToFirst();
             do {
@@ -138,7 +137,6 @@ public class ListRepoFragment extends Fragment implements RequestsObserver,OnLon
                 repository.setRepository(cr.getString(0), cr.getString(1), owner, cr.getString(3), cr.getString(4), cr.getString(5));
                 temp_data.add(repository);
             } while (cr.moveToNext());
-        }
     }
 
     /*
@@ -161,7 +159,7 @@ public class ListRepoFragment extends Fragment implements RequestsObserver,OnLon
      */
     @Override
     public void onError(String message) {
-        Log.d("errorResponse",message);
+        Log.e(getString(R.string.errorresponse),message);
     }
 
     /*
@@ -171,15 +169,15 @@ public class ListRepoFragment extends Fragment implements RequestsObserver,OnLon
     public void showDialog(final int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("");
-        builder.setMessage("visit user profile or repo");
-        builder.setPositiveButton("Repo", new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.visituserprofileorrepo);
+        builder.setPositiveButton(R.string.repo, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(ListRepoFragment.data.get(position).getHtml_url()));
                 startActivity(intent);            }
         });
-        builder.setNegativeButton("Profile", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.profile, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

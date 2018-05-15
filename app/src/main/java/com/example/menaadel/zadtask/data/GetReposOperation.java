@@ -1,6 +1,8 @@
 package com.example.menaadel.zadtask.data;
 
 import com.example.menaadel.zadtask.data.model.Repository;
+import com.example.menaadel.zadtask.utils.Constants;
+
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,7 +16,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GetReposOperation {
 
-    String BASE_URL="https://api.github.com";
     Retrofit retrofit;
     RetrofitApi retrofitApi;
     private static GetReposOperation Instance;
@@ -26,7 +27,7 @@ public class GetReposOperation {
     private Retrofit getRetrofitClient(){
             if (retrofit == null){
                 retrofit = new Retrofit.Builder()
-                        .baseUrl(BASE_URL)
+                        .baseUrl(Constants.BASE_URL)
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
             }
